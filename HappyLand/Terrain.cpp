@@ -128,7 +128,7 @@ void Terrain::render(map<string, GLint>& sparam){
 }
 
 void Terrain::animate(map<string, GLint>& params){
-/* ??? */
+	glUniformMatrix4fv(params["uniform_mvp"], 1, GL_FALSE, glm::value_ptr(mvp));
 }
 
 

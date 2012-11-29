@@ -142,6 +142,8 @@ void setP2Params(map<string, GLint> &params2){
 void setP3Params(map<string, GLint> &params3){
 	params3["attribute_coord3d"] = 0;
 	params3["attribute_colord"] = 0;
+	params3["uniform_mvp"] = 0;
+
 }
 
 void showFps(int &frame, int &timebase, float &fps){
