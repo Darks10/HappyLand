@@ -139,6 +139,11 @@ void setP2Params(map<string, GLint> &params2){
 	params2["uniform_cubemap"] = 0;
 }
 
+void setP3Params(map<string, GLint> &params3){
+	params3["attribute_coord3d"] = 0;
+	params3["attribute_colord"] = 0;
+}
+
 void showFps(int &frame, int &timebase, float &fps){
 	frame++;
 	float time=glutGet(GLUT_ELAPSED_TIME);

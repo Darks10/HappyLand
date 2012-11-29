@@ -15,8 +15,10 @@ Camera camera;
 Controller controller;
 Water water;
 Skybox skybox;
+Terrain terrain;
 Program p1;
 Program p2;
+Program p3;
 Bool *update = &False::getInstance();
 
 void onDisplay()
@@ -30,6 +32,9 @@ void onDisplay()
 
   glUseProgram(p2.id);
   skybox.render(p2.params);
+
+  glUseProgram(p3.id);
+  terrain.render(p3.params);
 
   glutSwapBuffers();
 }
@@ -85,17 +90,22 @@ int init_resources(void)
   mat4 mvp2 = camera.getViewProjection() * model2;
 
   water = Water(400, 400, 10, model, mvp, &camera, seed, decaying);
+  terrain = Terrain(20, 20, 5,1.0,model,mvp,&camera,seed);
   skybox = Skybox(model2, mvp2);
 
   controller = Controller(water.seed, &update, &skybox.model, lambda, &water.decaying, tdecay);
 
   map<string, GLint> params1;
   map<string, GLint> params2;
+  map<string, GLint> params3;
+
   setP1Params(params1);
   setP2Params(params2);
+  setP3Params(params3);
 
   p1 = Program(params1, "../HappyLand/agua");
   p2 = Program(params2, "../HappyLand/skybox");
+  p3 = Program(params3, "../HappyLand/terrain");
 
   return 1;
 }

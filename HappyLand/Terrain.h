@@ -6,7 +6,7 @@ GLuint v_grid, v_colors,ctd_tris;
 Camera* camera;
 unsigned int seed;
 
-Terrain(int, int, int, int, mat4, mat4, Camera*, unsigned int);
+Terrain(int, int, int, float, mat4, mat4, Camera*, unsigned int);
 Terrain(void);
 ~Terrain(void);
 void render(map<string, GLint>&);

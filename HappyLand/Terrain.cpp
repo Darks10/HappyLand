@@ -5,7 +5,7 @@ Terrain::Terrain(void){
 
 }
 
-Terrain::Terrain(int n, int m, int r, int level, mat4 model, mat4 mvp, Camera* camera, unsigned int seed)
+Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera* camera, unsigned int seed)
 : Object(model, mvp), camera(camera), seed(seed) {
 
 
@@ -18,7 +18,7 @@ Terrain::Terrain(int n, int m, int r, int level, mat4 model, mat4 mvp, Camera* c
 
 	Quadtree * a = new Quadtree(base,0);
 
-	a->Mid_point_formation(6,1.0); 
+	a->Mid_point_formation(level,r); 
   
 	vector<glm::mat3> triangles=  a->Quad_to_opengl();
   

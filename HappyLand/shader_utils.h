@@ -37,6 +37,7 @@ void bindUniform(const char *name, GLint& uniform, GLuint& program);
 void bindAttribute(const char *name, GLint& attribute, GLuint& program);
 void setP1Params(map<string, GLint> &params1);
 void setP2Params(map<string, GLint> &params2);
+void setP3Params(map<string, GLint> &params3);
 void showFps(int &frame, int &timebase, float &);
 void printMat4(mat4 m);
 #endif
