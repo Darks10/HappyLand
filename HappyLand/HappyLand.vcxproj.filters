@@ -28,6 +28,12 @@
       <Filter>Archivos de código fuente</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="terrain.f.glsl">
+      <Filter>Archivos de código fuente</Filter>
+    </None>
+    <None Include="terrain.v.glsl">
+      <Filter>Archivos de código fuente</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glew.c">
