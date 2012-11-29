@@ -90,7 +90,7 @@ int init_resources(void)
   mat4 mvp2 = camera.getViewProjection() * model2;
 
   water = Water(400, 400, 10, model, mvp, &camera, seed, decaying);
-  terrain = Terrain(20, 20, 5,1.0,model,mvp,&camera,seed);
+  terrain = Terrain(1000, 1000, 5,1.0,model,mvp,&camera,seed);
   skybox = Skybox(model2, mvp2);
 
   controller = Controller(water.seed, &update, &skybox.model, lambda, &water.decaying, tdecay);
@@ -134,6 +134,9 @@ void idle()
 
 	glUseProgram(p2.id);
 	skybox.animate(p2.params);
+
+	glUseProgram(p3.id);
+	terrain.animate(p3.params);
 
 	glutPostRedisplay();
 
