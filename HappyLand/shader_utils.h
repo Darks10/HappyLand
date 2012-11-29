@@ -22,6 +22,9 @@
 #include "Water.h"
 #include "Skybox.h"
 #include "Program.h"
+#include "Terrain.h"
+#include "Quadtree.h"
+#include "Functions.h"
 #include <string>
 #include <sstream>
 

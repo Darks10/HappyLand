@@ -6,7 +6,7 @@ Terrain::Terrain(void){
 }
 
 Terrain::Terrain(int n, int m, int r, int level, mat4 model, mat4 mvp, Camera* camera, unsigned int seed)
-: Object(model, mvp), camera(camera), seed(seed),  {
+: Object(model, mvp), camera(camera), seed(seed) {
 
 
 	glm::mat4x3 base(
@@ -103,7 +103,7 @@ void Terrain::render(map<string, GLint>& sparam){
 	glEnableVertexAttribArray(sparam["attribute_coord3d"]);
 	glBindBuffer(GL_ARRAY_BUFFER, v_grid);
 	glVertexAttribPointer(
-		attribute_coord3d, // attribute
+		sparam["attribute_coord3d"], // attribute
 		3,                 // number of elements per vertex, here (x,y,z)
 		GL_FLOAT,          // the type of each element
 		GL_FALSE,          // take our values as-is
@@ -111,10 +111,10 @@ void Terrain::render(map<string, GLint>& sparam){
 		0                  // offset of first element
 	);
 
-	glEnableVertexAttribArray(sparam["attribute_texcoord"]);
+	glEnableVertexAttribArray(sparam["attribute_colord"]);
 	glBindBuffer(GL_ARRAY_BUFFER, v_colors);
 	glVertexAttribPointer(
-		attribute_v_color, // attribute
+		sparam["attribute_colord"], // attribute
 		3,                 // number of elements per vertex, here (R,G,B)
 		GL_FLOAT,          // the type of each element
 		GL_FALSE,          // take our values as-is
@@ -124,7 +124,7 @@ void Terrain::render(map<string, GLint>& sparam){
 
 	glDrawArrays(GL_TRIANGLES, 0, ctd_tris);
 	glDisableVertexAttribArray(sparam["attribute_coord3d"]);
-	glDisableVertexAttribArray(sparam["attribute_texcoord"]);
+	glDisableVertexAttribArray(sparam["attribute_colord"]);
 }
 
 void Terrain::animate(map<string, GLint>& params){
