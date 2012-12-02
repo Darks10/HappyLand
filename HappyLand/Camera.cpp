@@ -4,7 +4,7 @@ Camera::Camera(void){
 	this->eye = vec3(1.0, 1.0, 1.0);
 	this->center = vec3(0.0, 0.0, 1.0);
 	this->up = vec3(0.0, 1.0, 0.0);
-	projection = perspective(45.0f, 1.0f*800/600, 0.1f, 20.0f);
+	projection = perspective(45.0f, 1.0f*800/600, 0.1f, 80.0f);
 	this->setView();
 }
 
@@ -12,7 +12,7 @@ Camera::Camera(vec3 eye, vec3 center, vec3 up, int width, int height){
 	this->eye = eye;
 	this->center = center;
 	this->up = up;
-	projection = perspective(45.0f, 1.0f*width/height, 0.1f, 20.0f);
+	projection = perspective(45.0f, 1.0f*width/height, 0.1f, 80.0f);
 	this->setView();
 }
 
@@ -30,6 +30,20 @@ void Camera::rotateRight(){
 
 void Camera::rotateLeft(){
 	this->rotate(a*delta);
+}
+
+void Camera::rotateVertical(vec2 p1, vec2 p2){
+	vec2 w = p2 - p1;
+	if(w.y != 0.0){
+		float d = a*delta*w.y/abs(w.y);
+
+		vec3 eyecenter = this->eyeToCenter();
+		vec3 axis = cross(eyecenter, up);
+		up = glm::rotate(up, d, axis);
+		center = glm::rotate(eyecenter, d, axis) + eye;
+
+		this->setView();
+	}
 }
 
 void Camera::moveBackward(){

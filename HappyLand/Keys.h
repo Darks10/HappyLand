@@ -11,6 +11,8 @@ class Key_e;
 class Key_z;
 class Key_x;
 class Key_c;
+class mouse_Keys;
+class Mouse_left;
 
 class Bool{
 public:
@@ -24,6 +26,7 @@ public:
 	virtual Bool* operator!(void){ return this;}
 	virtual Bool* operator&&(Bool*){ return this;}
 
+	virtual void move(Mouse_left &w, Camera &c){}
 	virtual void move(Key_w &w, Camera &c){}
 	virtual void move(Key_s &w, Camera &c){}
 	virtual void move(Key_a &w, Camera &c){}
@@ -33,6 +36,7 @@ public:
 	virtual void move(Key_z &w, float dtime){}
 	virtual void move(Key_x &w, Key_z&){}
 	virtual void move(Key_c &w){}
+	virtual void motion(mouse_Keys &w, int x, int y){}
 
 	virtual void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){}
 	virtual Bool& getIns(){ return *this; }
@@ -53,6 +57,7 @@ public:
 	Bool* operator!(void);
 	Bool* operator&&(Bool*);
 
+	void move(Mouse_left &w, Camera &c);
 	void move(Key_w &w, Camera &c);
 	void move(Key_s &w, Camera &c);
 	void move(Key_a &w, Camera &c);
@@ -62,6 +67,7 @@ public:
 	void move(Key_z &w, float dtime);
 	void move(Key_x &w, Key_z&);
 	void move(Key_c &w);
+	void motion(mouse_Keys &w, int x, int y);
 
 	void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c);
 
@@ -86,6 +92,7 @@ public:
 	Bool* operator!(void);
 	Bool* operator&&(Bool*);
 
+	void move(Mouse_left &w, Camera &c);
 	void move(Key_w &w, Camera &c);
 	void move(Key_s &w, Camera &c);
 	void move(Key_a &w, Camera &c);
@@ -95,8 +102,9 @@ public:
 	void move(Key_z &w, float dtime);
 	void move(Key_x &w, Key_z&);
 	void move(Key_c &w);
+	void motion(mouse_Keys &w, int x, int y);
 
-	void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){}
+	void update(mat4 &mvp, mat4 &mvp2, mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){}
 
 private:
 	False(){}
@@ -116,11 +124,35 @@ public:
 	virtual void move(float){}
 	virtual void move(){}
 	virtual void press(){}
+	virtual void press(int x, int y){}
 	virtual void release(){}
 	virtual void changeState(){
 		isPressed = !(*isPressed);
 	}
+	virtual void motion(int x, int y){}
 	virtual void print(){ cout << "D:!" << endl;}
+};
+
+class mouse_Keys: public Keys{
+public:
+	Bool **update;
+	int x,y;
+	int xi, yi;
+
+	mouse_Keys(Bool **update): Keys() { this->update = update; this->x = this->xi = this->y = this->yi = 0; }
+
+	void move(Camera& camera){}
+	void press(int x, int y);
+	void release();
+	void motion(int x, int y);
+	void Update(){ *update = &True::getInstance(); }
+};
+
+class Mouse_left: public mouse_Keys{
+public:
+	Mouse_left(Bool **update): mouse_Keys(update) {}
+
+	void move(Camera&);
 };
 
 class move_Keys: public Keys{

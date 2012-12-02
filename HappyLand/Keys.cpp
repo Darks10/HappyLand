@@ -22,6 +22,28 @@ Bool* False::operator&&(Bool *o){
 	return &False::getInstance();
 }
 
+void True::motion(mouse_Keys &w, int x, int y){
+	w.x = x;
+	w.y = y;
+}
+
+void False::motion(mouse_Keys &w, int x, int y){
+
+}
+
+void mouse_Keys::press(int x, int y){
+	isPressed = &True::getInstance();
+	this->xi = x;
+	this->yi = y;
+}
+
+void mouse_Keys::release(){
+	isPressed = &False::getInstance();
+}
+
+void mouse_Keys::motion(int x, int y){
+	isPressed->motion(*this, x, y);
+}
 
 void move_Keys::press(){
 	isPressed = &True::getInstance();
@@ -202,5 +224,20 @@ void True::move(Key_c &w){
 }
 
 void False::move(Key_c &w){
+
+}
+
+/* Click izquierdo*/
+void Mouse_left::move(Camera& c){
+	isPressed->move(*this, c);
+}
+
+void True::move(Mouse_left &w, Camera &c){
+	c.rotateVertical(vec2(w.xi, w.yi), vec2(w.x, w.y));
+
+	w.Update();
+}
+
+void False::move(Mouse_left &w, Camera &c){
 
 }

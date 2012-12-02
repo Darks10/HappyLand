@@ -10,10 +10,10 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 
 
 	glm::mat4x3 base(
-	glm::vec3(-n,m,-50.0),
-	glm::vec3(-n,-m,100.0),
-	glm::vec3(n,-m,50.0),
-	glm::vec3(n,m,-100.0)
+		glm::vec3(-n,m,-50.0),
+		glm::vec3(-n,-m,100.0),
+		glm::vec3(n,-m,50.0),
+		glm::vec3(n,m,-100.0)
 	);
 
 	Quadtree * a = new Quadtree(base,0);
@@ -29,21 +29,21 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 	int div=0;
 	ctd_tris = triangles.size()*3;
 	for(int i=0; i< triangles.size()*3*3;i+=3){
-      
-		triangulos[i] = triangles.at(mat)[div][0]/1000;
+	  
+		triangulos[i] = triangles.at(mat)[div][1]/1000;
 		triangulos[i+1] = triangles.at(mat)[div][2]/1000;
-		triangulos[i+2] = triangles.at(mat)[div][1]/1000;
-     
+		triangulos[i+2] = triangles.at(mat)[div][0]/1000;
+	 
 		div++;
 		if(div == 3){
 			mat++;
 			div=0;
 		}
-      
+	  
 		if (triangulos[i+1]*10< -0.95){
-			colores[i] = 0.0;
-			colores[i+1] = 0.0;
-			colores[i+2] = 0.0;
+			colores[i] = 0.1;
+			colores[i+1] = 0.1;
+			colores[i+2] = 0.1;
 		} else if (triangulos[i+1]*10< -0.7){
 			colores[i] = 0.2;
 			colores[i+1] = 0.2;
@@ -81,7 +81,7 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 			colores[i+1] = 1.0;
 			colores[i+2] = 1.0;
 		}
-      
+	  
 	}
 
 

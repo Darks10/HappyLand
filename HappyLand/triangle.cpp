@@ -81,9 +81,9 @@ int init_resources(void)
 
   float decaying = 1.0;
 
-  mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
-  mat4 model2 = scale(mat4(1.0), vec3(15.0, 15.0, 15.0));
-  mat4 model3 = scale(mat4(1.0), vec3(15.0, 15.0, 15.0)) /*glm::translate(glm::mat4(1.0f), glm::vec3(1.0, 1.0, 1.0))*/;
+  mat4 model = mat4(1.0);
+  mat4 model2 = scale(mat4(1.0), vec3(40.0, 40.0, 40.0));
+  mat4 model3 = scale(mat4(1.0), vec3(20.0, 20.0, 20.0)) /*glm::translate(glm::mat4(1.0f), glm::vec3(1.0, 1.0, 1.0))*/;
 
   camera = Camera(vec3(0.0, 2.0, 0.0), vec3(0.0, 0.0, -4.0), vec3(0.0, 1.0, 0.0), screen_width, screen_height);
 
@@ -93,7 +93,7 @@ int init_resources(void)
 
   water = Water(400, 400, 10, model, mvp, &camera, seed, decaying);
   skybox = Skybox(model2, mvp2);
-  terrain = Terrain(1000, 1000, 7,1.0,model3,mvp3,&camera,seed);
+  terrain = Terrain(1000, 1000, 7, 1.0, model3, mvp3, &camera, seed);
 
   controller = Controller(water.seed, &update, &skybox.model, lambda, &water.decaying, tdecay);
 
@@ -127,6 +127,8 @@ void idle()
 	controller.keys['q']->move(camera);
 	controller.keys['e']->move(camera);
 
+	controller.keys[GLUT_LEFT_BUTTON]->move(camera);
+
 	update->update(water.mvp, skybox.mvp,terrain.mvp, water.model, skybox.model,terrain.model, camera);
 
 	update = &False::getInstance();
@@ -159,6 +161,14 @@ void keyboard(unsigned char key, int x, int y){
 	controller.KeyPressed(key, x, y);
 }
 
+void mouse(int button, int state, int x, int y){
+	controller.MousePressed(button, state, x, y);
+}
+
+void mouseMove(int x, int y){
+	controller.MouseMotion(x, y);
+}
+
 int main(int argc, char* argv[])
 {
   /* Glut-related initialising functions */
@@ -184,6 +194,9 @@ int main(int argc, char* argv[])
   if (1 == init_resources())
   {
 	/* We can display it if everything goes OK */
+	glutIgnoreKeyRepeat(1);
+	glutMouseFunc(mouse);
+	glutMotionFunc(mouseMove);
 	glutKeyboardFunc(keyboard);
 	glutKeyboardUpFunc(keyboardup);
 	glutReshapeFunc(onReshape);

@@ -26,6 +26,7 @@ public:
 	void moveBackward();
 	void rotateRight();
 	void rotateLeft();
+	void rotateVertical(vec2 p1, vec2 p2);
 
 	mat4 getViewProjection();
 	vec3 eyeToCenter();
