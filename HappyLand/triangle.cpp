@@ -83,7 +83,7 @@ int init_resources(void)
 
   mat4 model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, 0.0, -4.0));
   mat4 model2 = scale(mat4(1.0), vec3(15.0, 15.0, 15.0));
-  mat4 model3 = glm::translate(glm::mat4(1.0f), glm::vec3(1.0, 1.0, 1.0));
+  mat4 model3 = scale(mat4(1.0), vec3(15.0, 15.0, 15.0)) /*glm::translate(glm::mat4(1.0f), glm::vec3(1.0, 1.0, 1.0))*/;
 
   camera = Camera(vec3(0.0, 2.0, 0.0), vec3(0.0, 0.0, -4.0), vec3(0.0, 1.0, 0.0), screen_width, screen_height);
 
@@ -93,7 +93,7 @@ int init_resources(void)
 
   water = Water(400, 400, 10, model, mvp, &camera, seed, decaying);
   skybox = Skybox(model2, mvp2);
-  terrain = Terrain(1000, 1000, 5,1.0,model3,mvp3,&camera,seed);
+  terrain = Terrain(1000, 1000, 7,1.0,model3,mvp3,&camera,seed);
 
   controller = Controller(water.seed, &update, &skybox.model, lambda, &water.decaying, tdecay);
 
