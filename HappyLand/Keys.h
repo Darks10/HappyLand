@@ -34,7 +34,7 @@ public:
 	virtual void move(Key_x &w, Key_z&){}
 	virtual void move(Key_c &w){}
 
-	virtual void update(mat4 &mvp, mat4 &mvp2, mat4 &m1, mat4 &m2, Camera &c){}
+	virtual void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){}
 	virtual Bool& getIns(){ return *this; }
 };
 
@@ -63,7 +63,7 @@ public:
 	void move(Key_x &w, Key_z&);
 	void move(Key_c &w);
 
-	void update(mat4 &mvp, mat4 &mvp2, mat4 &m1, mat4 &m2, Camera &c);
+	void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c);
 
 private:
 	True(){}
@@ -96,7 +96,7 @@ public:
 	void move(Key_x &w, Key_z&);
 	void move(Key_c &w);
 
-	void update(mat4 &mvp, mat4 &mvp2, mat4 &m1, mat4 &m2, Camera &c){}
+	void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){}
 
 private:
 	False(){}

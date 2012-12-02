@@ -21,3 +21,16 @@ glm::vec3 displacedmidpoint(glm::vec3 p1, glm::vec3 p2, glm::vec3 p3, glm::vec3 
     glm::vec3 ret(x,y,z);
     return ret;
 }
+
+void fuse( vector<glm::vec3*> v1, vector<glm::vec3*> v2){
+	/*int i = 0;
+	for(glm::vec3 *v : v1){
+		*v = *(v2.at(i));
+		i++;
+	}*/
+
+	for (int i =0;i<v1.size(); i++){
+		*v1.at(i) = *v2.at(i);
+	}
+
+}

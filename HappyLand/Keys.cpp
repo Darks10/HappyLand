@@ -1,8 +1,9 @@
 #include "shader_utils.h"
 
-void True::update(mat4 &mvp, mat4 &mvp2, mat4 &m1, mat4 &m2, Camera &c){
+void True::update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){
 	mvp = c.getViewProjection() * m1;
 	mvp2 = c.getViewProjection() * m2;
+	mvp3 = c.getViewProjection() * m3;
 }
 
 Bool* True::operator!(void){

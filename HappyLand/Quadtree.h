@@ -21,14 +21,14 @@ class Quadtree {
 public:
 	Quadtree(glm::mat4x3 puntos, Quadtree * padre );
 
-	void					Mid_point_displacement(int dheight,int level, int r);
-    vector<glm::mat3>       Quad_to_opengl();
-	void					Clear();
-	void					Mid_point_formation(int level,int r);
+	vector<vector<glm::vec3*>>	Mid_point_displacement(int dheight,int level, int r);
+    vector<glm::mat3>			Quad_to_opengl();
+	void						Clear();
+	void						Mid_point_formation(int level,int r);
 
 private:
-	int					level;
-	glm::mat4x3                             puntos;
+	int						level;
+	glm::mat4x3             puntos;
 
 	Quadtree *				padre;
 	Quadtree *				SI;
