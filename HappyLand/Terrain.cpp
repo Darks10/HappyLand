@@ -107,6 +107,8 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 		}
 	  
 	}
+	mat = 0;
+	div = 0;
 	for(int i=0; i< triangles.size()*3*3;i+=3){
 
 		stringstream buffer;
