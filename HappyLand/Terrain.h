@@ -2,7 +2,7 @@
 
 class Terrain: public Object{
 public:
-GLuint v_grid, v_colors,ctd_tris;
+GLuint v_grid, v_colors, v_normals, ctd_tris;
 Camera* camera;
 unsigned int seed;
 
