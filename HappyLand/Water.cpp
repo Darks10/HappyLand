@@ -7,6 +7,11 @@ Water::Water(void){
 Water::Water(int n, int m, int rep, mat4 model, mat4 mvp, Camera* camera, unsigned int seed, float decaying) 
 	: Object(model, mvp), camera(camera), seed(seed), decaying(decaying) {
 
+	q = 0.5;
+	k = 3;
+	type = 2;
+	circ = 0.0;
+
 	GLfloat *cube_texcoords = new GLfloat[n*m*2*4];
 	GLfloat *cube_vertices = new GLfloat[n*m*3*4];
 
@@ -131,7 +136,7 @@ void Water::animate(map<string, GLint>& params){
 	glm::mat3 m_3x3_inv_transp = glm::transpose(glm::inverse(glm::mat3(model)));
 	glUniformMatrix3fv(params["uniform_m_3x3_inv_transp"], 1, GL_FALSE, glm::value_ptr(m_3x3_inv_transp));
 	glUniform1i(params["uniform_nsin"], 10);
-	glUniform1i(params["uniform_type"], 2);
+	glUniform1i(params["uniform_type"], type);
 	glm::vec2 direction = glm::vec2(0.0, 1.0);
 	glUniform2fv(params["uniform_direction"], 1, glm::value_ptr(direction));
 	glUniform1f(params["uniform_mS"], 0.6);
@@ -139,10 +144,11 @@ void Water::animate(map<string, GLint>& params){
 	glUniform1ui(params["uniform_useed"], seed);
 	glUniform1f(params["uniform_mw"], 2.0);
 	glUniform1f(params["uniform_vdir"], 3.141592/4);
-	glUniform1i(params["uniform_k"], 3);
+	glUniform1i(params["uniform_k"], k);
 
+	glUniform1f(params["uniform_q"], q);
 	glUniform1f(params["uniform_decay"], decaying);
-	glUniform1f(params["uniform_circular"], 0.0);
+	glUniform1f(params["uniform_circular"], circ);
 	glUniformMatrix4fv(params["uniform_mvp"], 1, GL_FALSE, glm::value_ptr(mvp));
 }
 

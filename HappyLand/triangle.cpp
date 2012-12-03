@@ -95,7 +95,7 @@ int init_resources(void)
   skybox = Skybox(model2, mvp2);
   terrain = Terrain(1000, 1000, 7, 1.0, model3, mvp3, &camera, seed);
 
-  controller = Controller(water.seed, &update, &skybox.model, lambda, &water.decaying, tdecay);
+  controller = Controller(water.seed, &update, &skybox.model, lambda, &water.decaying, tdecay, water);
 
   map<string, GLint> params1;
   map<string, GLint> params2;

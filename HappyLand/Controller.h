@@ -2,12 +2,14 @@
 
 using namespace std;
 
+class Water;
+
 class Controller
 {
 public:
 	map<unsigned char, Keys*> keys;
 
-	Controller(unsigned int&, Bool**, mat4*, float, float*, float);
+	Controller(unsigned int&, Bool**, mat4*, float, float*, float, Water &);
 	Controller();
 	Controller(Controller &c);
 	void KeyPressed(unsigned char c, int x, int y);

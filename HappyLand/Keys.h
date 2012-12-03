@@ -11,6 +11,13 @@ class Key_e;
 class Key_z;
 class Key_x;
 class Key_c;
+class Key_m;
+class Key_n;
+class Key_k;
+class Key_l;
+class Key_o;
+class Key_p;
+class Key_i;
 class mouse_Keys;
 class Mouse_left;
 
@@ -35,7 +42,6 @@ public:
 	virtual void move(Key_e &w, Camera &c){}
 	virtual void move(Key_z &w, float dtime){}
 	virtual void move(Key_x &w, Key_z&){}
-	virtual void move(Key_c &w){}
 	virtual void motion(mouse_Keys &w, int x, int y){}
 
 	virtual void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){}
@@ -66,7 +72,6 @@ public:
 	void move(Key_e &w, Camera &c);
 	void move(Key_z &w, float dtime);
 	void move(Key_x &w, Key_z&);
-	void move(Key_c &w);
 	void motion(mouse_Keys &w, int x, int y);
 
 	void update(mat4 &mvp, mat4 &mvp2,mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c);
@@ -101,7 +106,6 @@ public:
 	void move(Key_e &w, Camera &c);
 	void move(Key_z &w, float dtime);
 	void move(Key_x &w, Key_z&);
-	void move(Key_c &w);
 	void motion(mouse_Keys &w, int x, int y);
 
 	void update(mat4 &mvp, mat4 &mvp2, mat4 &mvp3, mat4 &m1, mat4 &m2, mat4 &m3, Camera &c){}
@@ -238,8 +242,76 @@ public:
 		this->seed = &seed;
 	}
 
-	void move();
 	void press();
-	void release();
+};
+
+class Key_m: public Keys{
+public:
+	int *type;
+	Key_m(int &type) : Keys(), type(&type) {
+
+	}
+
+	void press();
+};
+
+class Key_n: public Keys{
+public:
+	float *circ;
+	Key_n(float &circ) : Keys(), circ(&circ) {
+
+	}
+
+	void press();
+};
+
+class Key_k: public Keys{
+public:
+	int *k;
+	Key_k(int &k) : Keys(), k(&k) {
+
+	}
+
+	void press();
+};
+
+class Key_l: public Keys{
+public:
+	int *k;
+	Key_l(int &k) : Keys(), k(&k) {
+
+	}
+
+	void press();
+};
+
+class Key_i: public Keys{
+public:
+	float *q;
+	Key_i(float &q) : Keys(), q(&q) {
+
+	}
+
+	void press();
+};
+
+class Key_o: public Keys{
+public:
+	float *q;
+	Key_o(float &q) : Keys(), q(&q) {
+
+	}
+
+	void press();
+};
+
+class Key_p: public Keys{
+public:
+	float *q;
+	Key_p(float &q) : Keys(), q(&q) {
+
+	}
+
+	void press();
 };
 

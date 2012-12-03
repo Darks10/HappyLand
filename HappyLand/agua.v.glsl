@@ -21,6 +21,7 @@ uniform float vdir;
 uniform int k;
 uniform float decay;
 uniform float circular;
+uniform float q;
 
 const float PI = 3.141529;
 
@@ -64,7 +65,7 @@ vec3 W(){
 		case(1):
 			return decay*vec3(0.0, 2*A*pow((sen + 1)/2, k), 0.0);
 		case(2):
-			float Q = 0.5/(w*A*nsin);
+			float Q = q/(w*A*nsin);
 			float cosin = cos(dot(dir, coord3d.xz)*w + time*S*w);
 			return decay*vec3(Q*A*dir.x*cosin, A*sen, Q*A*dir.y*cosin);
 		default:

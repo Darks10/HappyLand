@@ -211,20 +211,42 @@ void Key_c::press(){
 	*seed = rand();
 }
 
-void Key_c::release(){
-
+/* Tecla M */
+void Key_m::press(){
+	*type = (*type+1)%3;
 }
 
-void Key_c::move(){
-	isPressed->move(*this);
+/* Tecla N */
+void Key_n::press(){
+	if(*circ == 0.0)
+		*circ = 1.0;
+	else
+		*circ = 0.0;
 }
 
-void True::move(Key_c &w){
-
+/* Tecla K */
+void Key_k::press(){
+	*k = *k + 1;
 }
 
-void False::move(Key_c &w){
+/* Tecla L */
+void Key_l::press(){
+	*k = 0;
+}
 
+/* Tecla O */
+void Key_o::press(){
+	*q += 0.05;
+}
+
+/* Tecla P */
+void Key_p::press(){
+	*q -= 0.05;
+}
+
+/* Tecla I */
+void Key_i::press(){
+	*q = 0.5;
 }
 
 /* Click izquierdo*/

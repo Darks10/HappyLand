@@ -7,6 +7,10 @@ public:
 	Camera* camera;
 	unsigned int seed;
 	float decaying;
+	int k;
+	float circ;
+	int type;
+	float q;
 
 	Water(int, int, int, mat4, mat4, Camera*, unsigned int, float);
 	Water(void);

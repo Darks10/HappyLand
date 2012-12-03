@@ -129,6 +129,7 @@ void setP1Params(map<string, GLint> &params1){
 	params1["uniform_mw"] = 0;
 	params1["uniform_vdir"] = 0;
 	params1["uniform_k"] = 0;
+	params1["uniform_q"] = 0;
 	params1["uniform_decay"] = 0;
 	params1["uniform_circular"] = 0;
 }
