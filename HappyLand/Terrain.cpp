@@ -1,5 +1,7 @@
 #include "shader_utils.h"
+#include <limits>
 
+typedef std::numeric_limits< double > dbl;
 
 Terrain::Terrain(void){
 
@@ -17,7 +19,6 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 	);
 	map<string,glm::vec3> map1;
 	map<string,int> map2;
-	cout << 0.34244343435345 << endl;
 	Quadtree * a = new Quadtree(base,0);
 
 	a->Mid_point_formation(level,r); 
@@ -25,6 +26,7 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 	vector<glm::mat3> triangles=  a->Quad_to_opengl();
   
 	GLfloat *triangulos = new GLfloat[triangles.size()*3*3];
+	GLfloat *normales = new GLfloat[triangles.size()*3*3];
 	GLfloat *colores = new GLfloat[triangles.size()*3*3];
   
 	int mat=0;
@@ -39,22 +41,24 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 		div++;
 		if(div == 3){
 			glm::vec3 v1(
-				(triangles.at(mat)[1][0] - triangles.at(mat)[0][0]),
-				(triangles.at(mat)[1][1] - triangles.at(mat)[0][1]),
-				(triangles.at(mat)[1][2] - triangles.at(mat)[0][2]));
+				(triangles.at(mat)[1][0]/1000 - triangles.at(mat)[0][0]/1000),
+				(triangles.at(mat)[1][1]/1000 - triangles.at(mat)[0][1]/1000),
+				(triangles.at(mat)[1][2]/1000 - triangles.at(mat)[0][2]/1000));
 			glm::vec3 v2(
-				(triangles.at(mat)[2][0] - triangles.at(mat)[0][0]),
-				(triangles.at(mat)[2][1] - triangles.at(mat)[0][1]),
-				(triangles.at(mat)[2][2] - triangles.at(mat)[0][2]));
+				(triangles.at(mat)[2][0]/1000 - triangles.at(mat)[0][0]/1000),
+				(triangles.at(mat)[2][1]/1000 - triangles.at(mat)[0][1]/1000),
+				(triangles.at(mat)[2][2]/1000 - triangles.at(mat)[0][2]/1000));
 			glm::vec3 cross(
 				(v1[1]*v2[2] - v1[2]*v2[1]),
 				(v1[2]*v2[0] - v1[0]*v2[2]),
 				(v1[0]*v2[1] - v1[1]*v2[0]));
-			/*for(int k = 0; k<3;k++){
-				glm::vec3 aux(triangles.at(mat)[k][0],triangles.at(mat)[k][1],triangles.at(mat)[k][2]);
-				map1[aux]+= cross;
-				map2[aux]++;
-			}*/
+			for(int k = 0; k<3;k++){
+				stringstream buffer;
+				buffer.precision(dbl::digits10);
+				buffer <<triangles.at(mat)[k][0]<<triangles.at(mat)[k][1]<<triangles.at(mat)[k][2];
+				map1[buffer.str()]+= cross;
+				map2[buffer.str()]++;
+			}
 			mat++;
 			div=0;
 
@@ -103,7 +107,24 @@ Terrain::Terrain(int n, int m, int level, float r, mat4 model, mat4 mvp, Camera*
 		}
 	  
 	}
+	for(int i=0; i< triangles.size()*3*3;i+=3){
 
+		stringstream buffer;
+		buffer.precision(dbl::digits10);
+		buffer <<triangles.at(mat)[div][0]<<triangles.at(mat)[div][1]<<triangles.at(mat)[div][2];
+		glm::vec3 v = map1[buffer.str()];
+		int val = map2[buffer.str()];
+
+		normales[i] = v[1]/val;
+		normales[i+1] = v[2]/val;
+		normales[i+2] = v[0]/val;
+
+		div++;
+		if(div == 3){
+			mat++;
+			div=0;
+		}
+	}
 
 	glGenBuffers(1, &v_grid);
 	glBindBuffer(GL_ARRAY_BUFFER, v_grid);
