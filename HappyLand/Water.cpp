@@ -76,7 +76,7 @@ Water::Water(int n, int m, int rep, mat4 model, mat4 mvp, Camera* camera, unsign
 		"agua.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_INVERT_Y
+		SOIL_FLAG_INVERT_Y | SOIL_FLAG_TEXTURE_REPEATS
 		);
 	if(texture_id == 0)
 		cerr << "SOIL loading error: '" << SOIL_last_result() << "' (" << "agua.png" << ")" << endl;

@@ -51,6 +51,10 @@ Skybox::Skybox(mat4 model, mat4 mvp) : Object(model, mvp) {
 	if(text_3d_id == 0)
 		cerr << "SOIL loading error: '" << SOIL_last_result() << "' (" << "skybox" << ")" << endl;
 
+	glBindTexture(GL_TEXTURE_CUBE_MAP, text_3d_id);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
 	//GLfloat *pnt = new GLfloat[24];
 
 	//glBindBuffer(GL_ARRAY_BUFFER, vbo_cube_tex);
